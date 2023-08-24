@@ -1,13 +1,13 @@
-import { createContext } from "react";
+import { Dispatch, SetStateAction, createContext } from "react";
 
 export interface ContextType {
   darkMode: boolean;
-  setDarkMode: (status: boolean) => void;
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
 }
 
 const defaultContext: ContextType = {
   darkMode: false,
-  setDarkMode: (status: boolean) => {},
+  setDarkMode: (status: SetStateAction<boolean>): void => {},
 };
 
-export default createContext(defaultContext);
+export default createContext<ContextType>(defaultContext);
