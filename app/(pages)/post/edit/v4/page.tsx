@@ -1,4 +1,9 @@
 import axios from "axios";
+import { redirect } from "next/navigation";
+
+type Props = {
+    searchParams: { [key: string]: string | string[] | undefined };
+};
 
 const fetchPost = async (id: string) => {
     try {
@@ -10,14 +15,16 @@ const fetchPost = async (id: string) => {
     }
 };
 
+
 export default async function Page({
-                                       params: { id },
-                                   }: {
-    params: { id: string };
-}) {
+                                       searchParams,
+                                   }: Props) {
 
-    const post = await fetchPost(id);
-
+    if (!searchParams.id) {
+        redirect("/");
+    }
+console.log(searchParams)
+    const post = await fetchPost(searchParams.id as string);
 
     return (<div className="grid gap-3 content-start">
         {post ? (
