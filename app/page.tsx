@@ -38,20 +38,20 @@ export default async function Page() {
                     </Link>
                     <Link
                         className="px-3 py-3 bg-gray-300"
-                        key={post.id} href={`/post/edit/v2/${post.id}`}>
+                        key={post.id} href={`/post-v2/edit/${post.id}`}>
                         <span>V2 Client URL Schema:/post/edit/id</span>
                         <h1>{post.title}</h1>
                     </Link>
                     <Link
                         className="px-3 py-3 bg-gray-300"
-                        key={post.id} href={`/post/edit/v3?id=${post.id}`}>
-                        <span>V3 Client URL Schema:/post?id=id</span>
+                        key={post.id} href={`/post-v3/edit?id=${post.id}`}>
+                        <span>V3 Client URL Schema:/post/edit?id=id</span>
                         <h1>{post.title}</h1>
                     </Link>
                     <Link
                         className="px-3 py-3 bg-gray-300"
-                        key={post.id} href={`/post/edit/v4?id=${post.id}`}>
-                        <span>V4 Server URL Schema:/post?id=id</span>
+                        key={post.id} href={`/post-v4/edit?id=${post.id}`}>
+                        <span>V4 Server URL Schema:/post/edit?id=id</span>
                         <h1>{post.title}</h1>
                     </Link>
                 </>
