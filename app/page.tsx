@@ -1,12 +1,55 @@
-// import AutomaticFetchRequestDeduping from "@/app/components/AutomaticFetchRequestDeduping";
+import axios from "axios";
+import Link from "next/link";
 
-import AutomaticAxiosRequestDeduping from "@/app/components/AutomaticAxiosRequestDeduping";
+const fetchPosts = async (): Promise<Post[] | null> => {
+    try {
+        const { data } = await axios.get("https://jsonplaceholder.typicode.com/posts");
 
-export default function Home() {
+        return data;
+    } catch (_) {
+        return null;
+    }
+};
+
+export interface Post {
+    id: string,
+    title: string,
+    body: string
+}
+
+export default async function Page() {
+    const posts = await fetchPosts();
+
+    if (!posts) {
+        return (
+            <h1>No Posts Found</h1>
+        )
+    }
+
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            {/*<AutomaticFetchRequestDeduping/>*/}
-            <AutomaticAxiosRequestDeduping/>
-        </main>
-    )
+        <div className="grid gap-2 content-start">
+            {posts.map((post: Post) => (
+                <>
+                    <Link
+                        className="px-3 py-3 bg-gray-300"
+                        key={post.id} href={`/post/${post.id}`}>
+                        <span>V1 URL Schema:/post/id</span>
+                        <h1>{post.title}</h1>
+                    </Link>
+                    <Link
+                        className="px-3 py-3 bg-gray-300"
+                        key={post.id} href={`/post/${post.id}`}>
+                        <span>V2 URL Schema:/post/id</span>
+                        <h1>{post.title}</h1>
+                    </Link>
+                    <Link
+                        className="px-3 py-3 bg-gray-300"
+                        key={post.id} href={`/post?id=${post.id}`}>
+                        <span>V3 URL Schema:/post?id=id</span>
+                        <h1>{post.title}</h1>
+                    </Link>
+                </>
+            ))}
+        </div>
+    );
 }
