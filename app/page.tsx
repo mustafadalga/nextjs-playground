@@ -31,27 +31,32 @@ export default async function Page() {
             {posts.map((post: Post) => (
                 <>
                     <Link
-                        className="px-3 py-3 bg-gray-300"
+                        className="grid px-3 py-3 bg-gray-300"
                         key={post.id} href={`/post/edit/${post.id}`}>
-                        <span>V1 Server URL Schema:/post/edit/id</span>
+                        <span>V1 SSR URL Schema:/post/edit/id</span>
+                        <span className="text-red-600">Doesnt work!</span>
                         <h1>{post.title}</h1>
                     </Link>
                     <Link
-                        className="px-3 py-3 bg-gray-300"
+                        className="grid px-3 py-3 bg-gray-300"
                         key={post.id} href={`/post-v2/edit/${post.id}`}>
-                        <span>V2 Client URL Schema:/post/edit/id</span>
+                        <span>V2 CSR URL Schema:/post/edit/id</span>
+                        <span className="text-red-600">Doesnt work!</span>
                         <h1>{post.title}</h1>
                     </Link>
                     <Link
-                        className="px-3 py-3 bg-gray-300"
+                        className="grid px-3 py-3 bg-gray-300"
                         key={post.id} href={`/post-v3/edit?id=${post.id}`}>
-                        <span>V3 Client URL Schema:/post/edit?id=id</span>
+                        <span>V3 CSR URL Schema:/post/edit?id=id</span>
+                        <span className="text-lime-600">Working!</span>
+
                         <h1>{post.title}</h1>
                     </Link>
                     <Link
-                        className="px-3 py-3 bg-gray-300"
+                        className="grid px-3 py-3 bg-gray-300"
                         key={post.id} href={`/post-v4/edit?id=${post.id}`}>
-                        <span>V4 Server URL Schema:/post/edit?id=id</span>
+                        <span>V4 SSR URL Schema:/post/edit?id=id</span>
+                        <span className="text-red-600">Doesnt work!</span>
                         <h1>{post.title}</h1>
                     </Link>
                 </>

@@ -23,7 +23,6 @@ export default async function Page({
     if (!searchParams.id) {
         redirect("/");
     }
-console.log(searchParams)
     const post = await fetchPost(searchParams.id as string);
 
     return (<div className="grid gap-3 content-start">
