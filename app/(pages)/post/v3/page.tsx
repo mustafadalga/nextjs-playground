@@ -16,7 +16,6 @@ const fetchPost = async (id: string): Promise<Post | null> => {
 
 export default function Page() {
     const id = useSearchParams().get("id");
-    console.log(id)
     const [ isLoaded, setIsLoaded ] = useState(false);
     const [ post, setPost ] = useState<Post | null>(null);
     if (!id) {
