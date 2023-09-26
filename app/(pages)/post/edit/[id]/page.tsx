@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchPost = async (id: string) => {
     try {
-        const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/post/${id}`);
 
         return data;
     } catch (_) {

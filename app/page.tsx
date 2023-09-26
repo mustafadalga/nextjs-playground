@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const fetchPosts = async (): Promise<Post[] | null> => {
     try {
-        const { data } = await axios.get("https://jsonplaceholder.typicode.com/posts");
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/post/list`);
 
         return data;
     } catch (_) {
