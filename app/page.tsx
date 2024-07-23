@@ -1,55 +1,43 @@
+"use client";
+
 import axios from "axios";
-import Link from "next/link";
+import { useEffect } from "react";
+import axiosRetry, { isNetworkOrIdempotentRequestError } from "axios-retry";
+import { Simulate } from "react-dom/test-utils";
 
-const fetchPosts = async (): Promise<Post[] | null> => {
+async function GET() {
     try {
-        const { data } = await axios.get("https://jsonplaceholder.typicode.com/posts");
+        const client = axios.create();
+        axiosRetry(client, {
+            retries: 3,
+            retryDelay: () => 1000, // in milliseconds
+            shouldResetTimeout: true,
+            retryCondition: (error) => {
+                return (
+                    isNetworkOrIdempotentRequestError(error) ||
+                    error.code === "ECONNABORTED"
+                );
+            },
+        });
+        const response = await client.get('/api/variable/preview');
 
-        return data;
-    } catch (_) {
-        return null;
+    } catch (error) {
+        console.log("this is a error")
+        console.log(2222, 344, 5)
+        console.log(2323232, error)
     }
-};
-
-export interface Post {
-    id: string,
-    title: string,
-    body: string
 }
 
-export default async function Page() {
-    const posts = await fetchPosts();
+export default function Home() {
+    useEffect(() => {
 
-    if (!posts) {
-        return (
-            <h1>No Posts Found</h1>
-        )
-    }
 
+         GET()
+
+    })
     return (
-        <div className="grid gap-2 content-start">
-            {posts.map((post: Post) => (
-                <>
-                    <Link
-                        className="px-3 py-3 bg-gray-300"
-                        key={post.id} href={`/post/${post.id}`}>
-                        <span>V1 URL Schema:/post/id</span>
-                        <h1>{post.title}</h1>
-                    </Link>
-                    <Link
-                        className="px-3 py-3 bg-gray-300"
-                        key={post.id} href={`/post/${post.id}`}>
-                        <span>V2 URL Schema:/post/id</span>
-                        <h1>{post.title}</h1>
-                    </Link>
-                    <Link
-                        className="px-3 py-3 bg-gray-300"
-                        key={post.id} href={`/post?id=${post.id}`}>
-                        <span>V3 URL Schema:/post?id=id</span>
-                        <h1>{post.title}</h1>
-                    </Link>
-                </>
-            ))}
-        </div>
-    );
+        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+
+        </main>
+    )
 }
