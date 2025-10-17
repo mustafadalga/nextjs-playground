@@ -18,7 +18,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      Default layout.tsx
       <Link href="/dashboard">Dashboard</Link>
       {children}
       </body>
